@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Projetos | Kauan Kelvin</title>
+    <meta name="description" content="Explore os projetos desenvolvidos por [Seu Nome], demonstrando habilidades práticas em desenvolvimento web.">
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Ícones e Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar container">
+            <a href="index.html" class="logo">KauanKelvin.dev</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="sobre.html" class="nav-link">Sobre</a></li>
+                <li class="nav-item"><a href="projetos.html" class="nav-link">Projetos</a></li>
+                <li class="nav-item"><a href="contato.html" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="projetos" class="container page-section">
+            <h2 class="section-title fade-in">Meus Projetos</h2>
+            <div class="projetos-grid">
+                <!-- Projeto 1 -->
+                <div class="projeto-card fade-in">
+                    <img src="/assets/controle_de_gastos.png" alt="Imagem do Projeto 1" class="projeto-img">
+                    <div class="projeto-info">
+                        <h3>Controle de Gastos</h3>
+                        <p>Sistema web para controle de gastos com interface simples e objetiva.</p>
+                        <div class="projeto-links">
+                            <a href="https://myfinantrack.netlify.app/"" target="_blank"><i class="fas fa-globe"></i> Demo</a>
+                            <a href="https://github.com/kauankelvin7/ControleDeGastos.git" target="_blank"><i class="fab fa-github"></i> Código</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Projeto 2 -->
+                <div class="projeto-card fade-in">
+                    <img src="../assets/jogo_de_xadrez.png" alt="Imagem do Projeto 2" class="projeto-img">
+                    <div class="projeto-info">
+                        <h3>Jogo de Xadrez</h3>
+                        <p>Jogo de Xadrez desenvolvido com linguagem Java e Swing.</p>
+                        <div class="projeto-links">
+                            <a href="" target="_blank"><i class="fas fa-globe"></i> Demo</a>
+                            <a href="https://github.com/kauankelvin7/Jogo-de-Xadrez.git" target="_blank"><i class="fab fa-github"></i> Código</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="projeto-card fade-in">
+                    <img src="../assets/medsync.jpeg" alt="Imagem do Projeto 3" class="projeto-img">
+                    <div class="projeto-info">
+                        <h3>Sistema de Agendamento Ocupacional</h3>
+                        <p>Sistema de gestão de agendamentos de exames médicos ocupacionais, desenvolvido para clínicas de medicina do trabalho. A aplicação oferece uma solução robusta para o gerenciamento de empresas, funcionários, tipos de exames e agendamentos, com foco em segurança, performance e experiência do usuário.</p>
+                        <div class="projeto-links">
+                            <a href="https://medsyncocupacional.netlify.app/login" target="_blank"><i class="fas fa-globe"></i> Demo</a>
+                            <a href="https://github.com/kauankelvin7/sistema-agenda-ocupacional.git" target="_blank"><i class="fab fa-github"></i> Código</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <iframe id="project-iframe" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/kauankelvin7" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kauan-kelvin/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/kauan_kelvin45/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 Kauan Kelvin. Todos os direitos reservados.</p>
+    </footer>
+    
+    <script src="../js/script.js"></script>
+</body>
+</html>

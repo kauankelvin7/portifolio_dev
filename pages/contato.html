@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | Kauan Kelvin</title>
+    <meta name="description" content="Entre em contato com [Seu Nome] para discutir projetos, oportunidades ou apenas para dizer olá.">
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <!-- Ícones e Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar container">
+            <a href="/index.html" class="logo">KauanKelvin.dev</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="../index.html" class="nav-link">Início</a></li>
+                <li class="nav-item"><a href="sobre.html" class="nav-link">Sobre</a></li>
+                <li class="nav-item"><a href="projetos.html" class="nav-link">Projetos</a></li>
+                <li class="nav-item"><a href="contato.html" class="nav-link">Contato</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contato" class="container page-section">
+            <h2 class="section-title fade-in">Entre em Contato</h2>
+            <form id="contact-form" class="contato-form fade-in" novalidate>
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" class="form-control" required>
+                    <div class="error-message">Por favor, insira seu nome.</div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" class="form-control" required>
+                    <div class="error-message">Por favor, insira um email válido.</div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" class="form-control" rows="5" required></textarea>
+                    <div class="error-message">Por favor, escreva sua mensagem.</div>
+                </div>
+                <button type="submit" class="btn-submit">Enviar Mensagem</button>
+                <p id="form-success">Mensagem enviada com sucesso! Obrigado pelo contato.</p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/kauankelvin7" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kauan-kelvin/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/kauan_kelvin45/" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2025 Kauan Kelvin. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
