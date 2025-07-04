@@ -17,19 +17,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }));
     
-    const currentPage = window.location.pathname.split("/").pop(); // Pega o nome do arquivo, ex: "sobre.html"
+    const currentPage = window.location.pathname.split("/").pop();
     const navLinks = document.querySelectorAll('.nav-menu a');
 
     navLinks.forEach(link => {
         const linkPage = link.getAttribute('href');
-        // Trata o caso da página inicial (index.html ou "/")
         if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
             link.classList.add('active');
         }
     });
 
     // ANIMAÇÃO DE FADE-IN NOS ELEMENTOS ---
-    // Este efeito agora roda em cada página que for carregada.
     const fadeInObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {

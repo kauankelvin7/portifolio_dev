@@ -62,7 +62,7 @@ header {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 0; 
+    z-index: -1; 
 }
 
 
@@ -343,9 +343,9 @@ header {
 }
 
 
-/* ========== ESTILOS DA NOVA SEÇÃO DE HABILIDADES ========== */
+/* ========== ESTILOS DA SEÇÃO DE HABILIDADES ========== */
 .skills {
-    padding: 4rem 0; /* Espaçamento da seção */
+    padding: 4rem 0;
 }
 
 .skills-grid {
@@ -372,7 +372,7 @@ header {
 }
 
 .skill-card i {
-    font-size: 3rem; /* Tamanho do ícone */
+    font-size: 3rem;
     color: var(--cor-primaria);
     margin-bottom: 1rem;
 }
