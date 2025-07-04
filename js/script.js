@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     
-    // --- LÓGICA DO MENU HAMBURGER (RESPONSIVO) ---
+    // --- LÓGICA DO MENU HAMBURGER
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
@@ -16,8 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.remove('active');
         }
     }));
-
-    // --- MARCA O LINK ATIVO NO MENU BASEADO NA PÁGINA ATUAL ---
+    
     const currentPage = window.location.pathname.split("/").pop(); // Pega o nome do arquivo, ex: "sobre.html"
     const navLinks = document.querySelectorAll('.nav-menu a');
 
@@ -29,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- EFEITO INTERATIVO 1: ANIMAÇÃO DE FADE-IN NOS ELEMENTOS ---
+    // ANIMAÇÃO DE FADE-IN NOS ELEMENTOS ---
     // Este efeito agora roda em cada página que for carregada.
     const fadeInObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -46,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fadeInObserver.observe(element);
     });
 
-    // --- EFEITO INTERATIVO 2: EFEITO DE DIGITAÇÃO (APENAS NO INDEX.HTML) ---
+    // --- EFEITO INTERATIVO 2: EFEITO DE DIGITAÇÃO ---
     const typedElement = document.getElementById('typed-output');
     if (typedElement) {
         var typed = new Typed('#typed-output', {
@@ -57,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- VALIDAÇÃO DO FORMULÁRIO DE CONTATO (APENAS NO CONTATO.HTML) ---
+    // --- VALIDAÇÃO DO FORMULÁRIO DE CONTATO ---
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         const nameInput = document.getElementById('name');
