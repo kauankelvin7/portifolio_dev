@@ -126,15 +126,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Seleciona todos os elementos necessários
     const modal = document.getElementById('project-modal');
     const iframe = document.getElementById('project-iframe');
     const closeModalButton = document.querySelector('.close-button');
-    const demoLinks = document.querySelectorAll('.projeto-links a[target="_blank"]'); // Seleciona os links "Demo"
+    const demoLinks = document.querySelectorAll('.projeto-links a[target="_blank"]');
 
-    // Adiciona um evento de clique para cada link "Demo"
     demoLinks.forEach(link => {
-        // Verifica se o link é para a demonstração (contém o ícone 'fa-globe')
         if (link.querySelector('.fa-globe')) {
             link.addEventListener('click', function(event) {
                 event.preventDefault(); // Impede que o link abra em uma nova aba
