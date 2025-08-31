@@ -8,7 +8,7 @@
 
 **Um portfólio moderno e responsivo showcasing minhas habilidades como Desenvolvedor FullStack**
 
-[🌐 Ver Site](https://kauankelvin.dev) • [📱 Demo Mobile](https://kauankelvin.dev) • [📧 Contato](mailto:kelvinkauan722@gmail.com)
+[🌐 Ver Site](https://kauankelvindev.netlify.app/) • [📱 Demo Mobile](https://kauankelvindev.netlify.app/) • [📧 Contato](mailto:kelvinkauan722@gmail.com)
 
 </div>
 
