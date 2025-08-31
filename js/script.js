@@ -16,17 +16,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }));
     
+    // --- LÓGICA DE CLASSE ATIVA PARA NAVEGAÇÃO
     const currentPage = window.location.pathname.split("/").pop();
     const navLinks = document.querySelectorAll('.nav-menu a');
 
     navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href');
+        const linkPage = link.getAttribute('href').split("/").pop();
         if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
             link.classList.add('active');
         }
     });
 
-    // ANIMAÇÃO DE FADE-IN NOS ELEMENTOS
+    // --- ANIMAÇÃO DE FADE-IN NOS ELEMENTOS
     const fadeInObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fadeInObserver.observe(element);
     });
 
-    // EFEITO DE DIGITAÇÃO
+    // --- EFEITO DE DIGITAÇÃO
     const typedElement = document.getElementById('typed-output');
     if (typedElement) {
         var typed = new Typed('#typed-output', {
@@ -53,15 +54,42 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- VALIDAÇÃO DO FORMULÁRIO COM POPUP DE ENVIO DE MENSAGEM ---
+    // --- LÓGICA ATUALIZADA DO FORMULÁRIO DE CONTATO
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
-        const nameInput = document.getElementById('name');
-        const emailInput = document.getElementById('email');
-        const messageInput = document.getElementById('message');
+        // Função para mostrar mensagens de erro
+        function showError(input, message) {
+            const formGroup = input.parentElement;
+            const errorDiv = formGroup.querySelector('.error-message');
+            input.classList.add('invalid');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
 
-        contactForm.addEventListener('submit', function(event) {
-            // Remove erros anteriores
+        // Função para limpar erros
+        function clearError(input) {
+            const formGroup = input.parentElement;
+            const errorDiv = formGroup.querySelector('.error-message');
+            input.classList.remove('invalid');
+            errorDiv.style.display = 'none';
+        }
+
+        // Função para validar email
+        function isValidEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        // Adiciona um evento de escuta para o envio do formulário
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault(); // Impede o envio padrão do formulário
+
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+            // Limpa erros anteriores
             document.querySelectorAll('.error-message').forEach(error => {
                 error.style.display = 'none';
             });
@@ -71,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let isValid = true;
 
-            // Validações
+            // Realiza validação
             if (nameInput.value.trim() === '') {
                 showError(nameInput, 'Por favor, insira seu nome.');
                 isValid = false;
@@ -93,163 +121,51 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearError(messageInput);
             }
 
-            // Se inválido, impede o envio
+            // Se o formulário não for válido, para a execução
             if (!isValid) {
-                event.preventDefault();
-                return false;
+                return;
             }
 
-            showSuccessPopup();
+            // Desabilita o botão para evitar envios duplicados
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+
+            const formData = new FormData(contactForm);
             
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            if (submitBtn) {
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Enviando...';
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Exibe a mensagem de sucesso
+                    document.getElementById('form-success').style.display = 'block';
+                    contactForm.reset();
+
+                    setTimeout(() => {
+                        window.location.href = '../index.html';
+                    }, 5000);
+                } else {
+                    alert("Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.");
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Enviar Mensagem';
+                }
+            } catch (error) {
+                console.error("Erro:", error);
+                alert("Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente.");
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Enviar Mensagem';
             }
         });
-
-        // FUNÇÃO PARA MOSTRAR POPUP DE ENVIO DE MENSAGEM
-        function showSuccessPopup() {
-            // Cria o popup
-            const popup = document.createElement('div');
-            popup.id = 'success-popup';
-            popup.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0, 0, 0, 0.6);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    z-index: 10000;
-                    animation: fadeIn 0.3s ease;
-                ">
-                    <div style="
-                        background: #fff;
-                        padding: 40px 30px;
-                        border-radius: 20px;
-                        text-align: center;
-                        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-                        max-width: 420px;
-                        width: 90%;
-                        animation: popIn 0.4s ease;
-                    ">
-                        <div style="
-                            width: 80px;
-                            height: 80px;
-                            background: linear-gradient(135deg, #4CAF50, #45a049);
-                            border-radius: 50%;
-                            margin: 0 auto 25px;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            font-size: 40px;
-                            color: white;
-                            animation: bounce 0.6s ease;
-                        ">✓</div>
-                        <h3 style="
-                            color: #333;
-                            margin-bottom: 15px;
-                            font-size: 28px;
-                            font-weight: 600;
-                        ">Mensagem Enviada! 🎉</h3>
-                        <p style="
-                            color: #666;
-                            margin-bottom: 25px;
-                            line-height: 1.6;
-                            font-size: 16px;
-                        ">Obrigado pelo contato! Receberei sua mensagem e responderei o mais breve possível.</p>
-                        <button onclick="document.getElementById('success-popup').remove()" style="
-                            background: linear-gradient(135deg, #4CAF50, #45a049);
-                            color: white;
-                            border: none;
-                            padding: 12px 30px;
-                            border-radius: 25px;
-                            cursor: pointer;
-                            font-size: 16px;
-                            font-weight: 500;
-                            transition: all 0.3s ease;
-                        " 
-                        onmouseover="this.style.transform='scale(1.05)'" 
-                        onmouseout="this.style.transform='scale(1)'">Perfeito!</button>
-                    </div>
-                </div>
-            `;
-
-            // Adiciona estilos de animação
-            if (!document.getElementById('popup-styles')) {
-                const style = document.createElement('style');
-                style.id = 'popup-styles';
-                style.textContent = `
-                    @keyframes fadeIn {
-                        from { opacity: 0; }
-                        to { opacity: 1; }
-                    }
-                    @keyframes popIn {
-                        from { 
-                            transform: scale(0.7) translateY(-50px); 
-                            opacity: 0; 
-                        }
-                        to { 
-                            transform: scale(1) translateY(0); 
-                            opacity: 1; 
-                        }
-                    }
-                    @keyframes bounce {
-                        0%, 20%, 53%, 80%, 100% {
-                            transform: translate3d(0,0,0);
-                        }
-                        40%, 43% {
-                            transform: translate3d(0, -10px, 0);
-                        }
-                        70% {
-                            transform: translate3d(0, -5px, 0);
-                        }
-                        90% {
-                            transform: translate3d(0, -2px, 0);
-                        }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
-
-            document.body.appendChild(popup);
-
-            // Auto-remove após 8 segundos
-            setTimeout(() => {
-                if (popup.parentElement) {
-                    popup.remove();
-                }
-            }, 8000);
-        }
-
-        // Funções auxiliares
-        function showError(input, message) {
-            const formGroup = input.parentElement;
-            const errorDiv = formGroup.querySelector('.error-message');
-            input.classList.add('invalid');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-        }
-
-        function clearError(input) {
-            const formGroup = input.parentElement;
-            const errorDiv = formGroup.querySelector('.error-message');
-            input.classList.remove('invalid');
-            errorDiv.style.display = 'none';
-        }
-
-        function isValidEmail(email) {
-            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return regex.test(email);
-        }
     }
+
 });
 
-// MODAL DE PROJETOS
+// --- MODAL DE PROJETOS
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('project-modal');
     const iframe = document.getElementById('project-iframe');
@@ -275,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeModal() {
         modal.style.display = 'none';
-        iframe.src = ''; 
+        iframe.src = '';
     }
 
     if (closeModalButton) {
