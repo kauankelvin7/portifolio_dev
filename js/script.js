@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- VALIDAÇÃO DO FORMULÁRIO DE CONTATO ---
+    // --- VALIDAÇÃO DO FORMULÁRIO DE CONTATO (CORRIGIDA) ---
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         const nameInput = document.getElementById('name');
@@ -63,11 +63,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const formSuccess = document.getElementById('form-success');
 
         contactForm.addEventListener('submit', function(event) {
-            event.preventDefault(); 
+            // Remove todas as mensagens de erro anteriores
+            document.querySelectorAll('.error-message').forEach(error => {
+                error.style.display = 'none';
+            });
+            document.querySelectorAll('.form-control').forEach(input => {
+                input.classList.remove('invalid');
+            });
             
-            formSuccess.style.display = 'none';
             let isValid = true;
 
+            // Validação do nome
             if (nameInput.value.trim() === '') {
                 showError(nameInput, 'Por favor, insira seu nome.');
                 isValid = false;
@@ -75,6 +81,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearError(nameInput);
             }
 
+            // Validação do email
             if (!isValidEmail(emailInput.value)) {
                 showError(emailInput, 'Por favor, insira um email válido.');
                 isValid = false;
@@ -82,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearError(emailInput);
             }
 
+            // Validação da mensagem
             if (messageInput.value.trim() === '') {
                 showError(messageInput, 'Por favor, escreva sua mensagem.');
                 isValid = false;
@@ -89,13 +97,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearError(messageInput);
             }
 
-            if (isValid) {
-                console.log('Formulário válido. Enviando dados...');
-                contactForm.reset();
-                formSuccess.style.display = 'block';
-                 setTimeout(() => {
-                    formSuccess.style.display = 'none';
-                }, 4000);
+            // SE INVÁLIDO, IMPEDE O ENVIO
+            if (!isValid) {
+                event.preventDefault();
+                return false;
+            }
+
+            // SE VÁLIDO, PERMITE O ENVIO NORMAL
+            console.log('Formulário válido. Enviando para FormSubmit...');
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Enviando...';
             }
         });
 
@@ -136,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const url = this.getAttribute('href');
                 
                 if (url && url !== "#") { // Verifica se o link não está vazio
-                    iframe.src = url; // Define o URL do projeto no iframe
+                    iframe.src = url;
                     modal.style.display = 'block'; // Mostra a modal
                 } else {
                     alert('Nenhuma demonstração disponível para este projeto.');
