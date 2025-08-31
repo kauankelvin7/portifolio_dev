@@ -165,13 +165,13 @@ portfolio/
 
 ## 🔄 Atualizações Recentes
 
-### v2.0 - Janeiro 2025
+### v2.0 - Agosto 2025
 - 🆕 Novo design responsivo
 - ⚡ Otimizações de performance
 - 📧 Sistema de contato funcional
 - 🎨 Animações aprimoradas
 
-### v1.5 - Dezembro 2024
+### v1.5 - Julho 2025
 - 📱 Melhorias mobile
 - 🔧 Correções de bugs
 - 📈 Otimização SEO
